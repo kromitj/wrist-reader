@@ -11,7 +11,7 @@ unsigned char       outputPinsAmt = 8;
 int                 timeCharIsOn = 100;
 int                 timeCharIsOff = 200;
 char                lEDBrightness = 15;
-String              sentance = "Hello World! abcdefghijklmnopqrstuvwxyz 0123456789 now agian :}"; 
+String              sentence = "Hello World! abcdefghijklmnopqrstuvwxyz 0123456789 now agian :}"; 
 
  char               lowerCaseArray[] = {96,'e','t','n','a','s','h','f','o','r','d','g','l','y',
                          'p','z','i','c','u','b','m','v','k',123 ,'w','j','x',124,'q',125,126,127};
@@ -34,13 +34,13 @@ long                lastStateChangePause = 0;
 
 
 
-void parseSentance(String sentanceToParse,bool &pauseVariable) {
+void parseSentence(String sentenceToParse,bool &pauseVariable) {
   int messageIndex = 0; // keeps track of you place in the string/message  
-  String sentanceCopy = sentanceToParse;    
-  while (sentanceCopy.length() > 0) {
+  String sentenceCopy = sentenceToParse;    
+  while (sentenceCopy.length() > 0) {
     handleBtn_On_Off(digitalInputPins[1], lastStateChangePause, 399, pauseIsActive, true, 8);      // pause btn    
     if (!pauseVariable) { 
-      char currentChar = sentanceCopy.charAt(0);
+      char currentChar = sentenceCopy.charAt(0);
       if (currentChar != '\0') {
         messageIndex++;        
         byte charByte = charToByte(currentChar);
@@ -50,7 +50,7 @@ void parseSentance(String sentanceToParse,bool &pauseVariable) {
         resetStates();          
         delay(timeCharIsOff);
       };
-        sentanceCopy.remove(0,1);
+        sentenceCopy.remove(0,1);
     };  // if pause isn't active
   }; // while loop
 };  // end of function
@@ -151,7 +151,7 @@ void loop() {
     readingMessage = true;  
   };
   if ((!inputIsActive) && (readingMessage)) {
-    parseSentance(message, pauseIsActive);
+    parseSentence(message, pauseIsActive);
     message.remove(0, message.length());
   };
   inputIsActive = true;
